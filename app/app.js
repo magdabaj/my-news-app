@@ -37,7 +37,7 @@ import { translationMessages } from './i18n';
 const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
-
+/home/oem/Projects/react-boilerplate/news-app
 const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
