@@ -11,10 +11,12 @@ import Drawer from "../Drawer";
 // import styled from 'styled-components';
 
 function Navigation({ ...props}) {
-  console.log(props);
+  console.log('props', props);
   return <div>
     <AppBar/>
-    <Drawer/>
+    <Drawer
+        tags={props.tags}
+    />
     This is navigation component
   </div>;
 }
