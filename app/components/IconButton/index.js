@@ -5,22 +5,29 @@
  */
 
 import React from "react";
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 import classNames from 'classnames';
 import FontAwesome from 'react-fontawesome';
-import {icon} from "@fortawesome/fontawesome-svg-core";
+import './styles.css';
 
-function IconButton({icon}) {
-  return <div>
-    <h1>Icon button</h1>
+const IconButton = ({icon, onClick, buttonClass, iconClass}) => {
+  return <div
+      className={'iconButton'}
+      onClick={onClick}
+  >
     <FontAwesome
-        // className={iconClass}
+        className={iconClass}
         name={icon}
     />
   </div>;
-}
+};
 
-IconButton.propTypes = {};
+IconButton.propTypes = {
+  icon: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  buttonClass: PropTypes.string,
+  iconClass: PropTypes.string,
+};
 
 export default IconButton;

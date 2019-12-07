@@ -4,7 +4,7 @@
  *
  */
 
-import { GET_TAGS, GET_ARTICLES_BY_TAG, GET_TAGS_FAILED, GET_TAGS_SUCCESS } from "./constants";
+import {GET_TAGS, GET_ARTICLES_BY_TAG, GET_TAGS_FAILED, GET_TAGS_SUCCESS, SELECT_TAG, TOGGLE_DRAWER} from "./constants";
 
 export const getTags = () => ({
   type: GET_TAGS
@@ -20,7 +20,12 @@ export const getTagsFailed = error => ({
   error
 });
 
-export const getArticlesByTag = tagId => ({
-  type: GET_ARTICLES_BY_TAG,
-  tagId,
+export const selectTag = selectedTag => ({
+  type: SELECT_TAG,
+  selectedTag,
 });
+
+export const toggleDrawer =  () => ({
+  type: TOGGLE_DRAWER,
+});
+

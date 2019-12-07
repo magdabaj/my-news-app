@@ -11,6 +11,11 @@ export const fetchTags = async () => {
     return data;
 };
 
-export const getArticlesByTag = tagId => {
-    // todo get articles by tag name
+export const getArticlesByTag = async (tagId) => {
+    const response = await fetch(`${api}/${tagId}`);
+    const data = await response.json();
+    if(response.status >= 400){
+        throw new Error(data.error);
+    }
+    return data;
 };

@@ -2,7 +2,7 @@ import { handleError, handleResponse } from "./apiUtils";
 
 const api = 'http://localhost:9000/articles';
 
-export const fetchUsers = async () => {
+export const fetchArticles = async () => {
     const response = await fetch(api);
     const data = await response.json();
     if(response.status >= 400){

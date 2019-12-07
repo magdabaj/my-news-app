@@ -12,10 +12,14 @@ import { compose } from "redux";
 
 import { useInjectSaga } from "utils/injectSaga";
 import { useInjectReducer } from "utils/injectReducer";
-import makeSelectNavigationContainer, {makeSelectTags} from "./selectors";
+import makeSelectNavigationContainer, {
+  makeSelectIsDrawerOpen,
+  makeSelectSelectedTag,
+  makeSelectTags
+} from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
-import { getArticlesByTag, getTags } from './actions';
+import { getTags, selectTag, toggleDrawer} from './actions';
 import Navigation from "../../components/Navigation";
 
 export function NavigationContainer({...props }) {
@@ -31,21 +35,28 @@ export function NavigationContainer({...props }) {
   return <Navigation {...props} />;
 }
 
-NavigationContainer.propTypes = {
-  tags: PropTypes.array.isRequired,
-  getTags: PropTypes.func.isRequired,
-  getArticlesByTag: PropTypes.func.isRequired,
-};
+// NavigationContainer.propTypes = {
+//   tags: PropTypes.array.isRequired,
+//   getTags: PropTypes.func.isRequired,
+//   getArticlesByTag: PropTypes.func.isRequired,
+//   selectTag: PropTypes.func.isRequired,
+//   toggleDrawer: PropTypes.func.isRequired,
+//   selectedTag: PropTypes.object,
+//   isDrawerOpen: PropTypes.bool.isRequired,
+// };
 
 const mapStateToProps = createStructuredSelector({
   navigationContainer: makeSelectNavigationContainer(),
   tags: makeSelectTags(),
+  selectedTag: makeSelectSelectedTag(),
+  isDrawerOpen: makeSelectIsDrawerOpen(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    getArticlesByTag: tagId => dispatch(getArticlesByTag(tagId)),
     getTags: () => dispatch(getTags()),
+    selectTag: selectedTag => dispatch(selectTag(selectedTag)),
+    toggleDrawer: () => dispatch(toggleDrawer()),
   };
 }
 
