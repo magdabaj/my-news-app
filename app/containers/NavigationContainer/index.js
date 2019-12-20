@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
+import {makeSelectEmail} from "../LoginContainer/selectors";
 
 import { useInjectSaga } from "utils/injectSaga";
 import { useInjectReducer } from "utils/injectReducer";
@@ -25,6 +26,8 @@ import Navigation from "../../components/Navigation";
 export function NavigationContainer({...props }) {
   useInjectReducer({ key: "navigationContainer", reducer });
   useInjectSaga({ key: "navigationContainer", saga });
+
+  // console.log("navigation container props", {...props})
 
   useEffect( () => {
     if (props.tags.length === 0) {
@@ -50,6 +53,7 @@ const mapStateToProps = createStructuredSelector({
   tags: makeSelectTags(),
   selectedTag: makeSelectSelectedTag(),
   isDrawerOpen: makeSelectIsDrawerOpen(),
+  email: makeSelectEmail(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -19,7 +19,7 @@ const selectNavigationContainerDomain = state =>
 const makeSelectNavigationContainer = () =>
   createSelector(
     selectNavigationContainerDomain,
-    substate => substate,
+    substate => substate
   );
 
 const makeSelectTags = () =>
@@ -38,7 +38,7 @@ const makeSelectIsDrawerOpen = () =>
     createSelector(
         selectNavigationContainerDomain,
         substate => substate.isDrawerOpen,
-    )
+    );
 
 export default makeSelectNavigationContainer;
 export { selectNavigationContainerDomain, makeSelectTags, makeSelectIsDrawerOpen, makeSelectSelectedTag };

@@ -13,8 +13,9 @@ import Heading from './Heading';
 import LinkContainer from './LinkContainer';
 import styles from './styles.css';
 import StyledLink from "./StyledLink";
+import {Link} from "react-router-dom";
 
-const AppBar = ({toggleDrawer}) => {
+const AppBar = ({toggleDrawer, email}) => {
   return <AppBarContainer>
     <IconButton
       icon={"bars"}
@@ -26,7 +27,7 @@ const AppBar = ({toggleDrawer}) => {
       <StyledLink to={'/topics'}>Coder daily</StyledLink>
     </Heading>
     <LinkContainer>
-      Login
+      {email || <Link to={"/login"}> login </Link>}
     </LinkContainer>
   </AppBarContainer>;
 };
