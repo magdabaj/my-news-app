@@ -24,8 +24,8 @@ export const ArticlesListContainer = ({...props}) => {
 
 
   useEffect(() => {
-    if(props.selectedTag.tag_id !== null) {
-          props.getArticlesForTag(props.selectedTag.tag_id);
+    if(props.selectedTag.id/*tag_id*/ !== null) {
+          props.getArticlesForTag(props.selectedTag.id/*tag_id*/);
     }
     else {
       props.getAllArticles();

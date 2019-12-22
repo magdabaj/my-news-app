@@ -32,8 +32,13 @@ const makeSelectEmail = () =>
     createSelector(
         selectLoginContainerDomain,
         substate => substate.loginUser.email,
-    )
+    );
 
+const makeSelectLoggedUser = () =>
+    createSelector(
+        selectLoginContainerDomain,
+        substate => substate.loggedUser,
+    );
 
 export default makeSelectLoginContainer;
-export { selectLoginContainerDomain, makeSelectLoginUser, makeSelectEmail };
+export { selectLoginContainerDomain, makeSelectLoginUser, makeSelectEmail, makeSelectLoggedUser };

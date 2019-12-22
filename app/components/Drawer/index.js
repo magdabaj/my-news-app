@@ -16,7 +16,8 @@ const Drawer = ({ tags, isDrawerOpen, selectTag }) => {
     {tags.map(tag => (
         <div
             className={'item'}
-            key={tag.tag_id}
+            key={tag.id}
+            // key={tag.tag_id}
             onClick={()=>selectTag(tag)}
         >
           {tag.name}

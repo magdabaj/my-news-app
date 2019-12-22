@@ -16,8 +16,8 @@ const LinkList = ({articlesForTag, ...props}) => {
         {articlesForTag.length > 0 ?
             articlesForTag.map(article => (
                 <Link
-                    key={article.article_id}
-                    article={article}
+                    key={article.article.id}
+                    article={article.article}
                 />
         )) :
         <h1>There are no articles in this category yet</h1>}
