@@ -15,6 +15,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NavigationContainer from "../NavigationContainer/Loadable";
 import ArticlesListContainer from "../ArticlesListContainer/Loadable";
 import LoginContainer from "../LoginContainer/Loadable";
+import ArticleFormContainer from '../ArticleFormContainer/Loadable';
 
 import GlobalStyle from '../../global-styles';
 
@@ -24,9 +25,10 @@ export default function App() {
         <NavigationContainer/>
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route path={'/topics/:tag/add'} component={ArticleFormContainer} />
         <Route path={"/topics/:tag"} component={ArticlesListContainer} />
-        <Route path={"/topics"} component={ArticlesListContainer}/>
-        <Route path={"/login"} component={LoginContainer}/>
+        <Route path={"/topics"} component={ArticlesListContainer} />
+        <Route path={"/login"} component={LoginContainer} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

@@ -4,6 +4,7 @@ import { fetchTags } from '../../utils/api/tagsApi';
 import {getTagsFailed, getTagsSuccess} from "./actions";
 import {GET_TAGS, GET_TAGS_SUCCESS, SELECT_TAG} from "./constants";
 import makeSelectNavigationContainer, {selectNavigationContainerDomain} from "./selectors";
+import {START_ADD} from "../ArticlesListContainer/constants";
 
 // Individual exports for testing
 export function* getTags() {
@@ -41,10 +42,19 @@ export function* watchTagsPush() {
     yield takeLatest(SELECT_TAG, pushTag);
 }
 
+export function* startArticleAdd(action) {
+    yield put(push(`/topics/${action.tagName.name}/add`));
+}
+
+export function* watchArticleAdd() {
+    yield takeLatest(START_ADD, startArticleAdd);
+}
+
 export default function* rootSaga() {
     yield all([
         watchTagsLoad(),
         watchTagsPush(),
         watchDefaultArticlesSetting(),
+        watchArticleAdd(),
     ])
 }

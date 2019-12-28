@@ -27,7 +27,7 @@ const selectTag = () =>
 
             return selectedTag || {
                 name: '',
-                tag_id: null,
+                id: null,
             }
         }
     );

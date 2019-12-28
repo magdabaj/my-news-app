@@ -15,7 +15,7 @@ import { useInjectReducer } from "utils/injectReducer";
 import makeSelectArticlesListContainer, {makeSelectArticles, selectSlug, selectTag} from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
-import { getArticlesForTag, getAllArticles } from "./actions";
+import { getArticlesForTag, getAllArticles, startAdd } from "./actions";
 import LinkList from "../../components/LinkList";
 
 export const ArticlesListContainer = ({...props}) => {
@@ -24,14 +24,18 @@ export const ArticlesListContainer = ({...props}) => {
 
 
   useEffect(() => {
-    if(props.selectedTag.id/*tag_id*/ !== null) {
+
+    if(props.selectedTag.id/*tag_id*/ !== null
+        && props.selectedTag !== undefined)
+    {
           props.getArticlesForTag(props.selectedTag.id/*tag_id*/);
     }
     else {
-      props.getAllArticles();
+      // props.getAllArticles();
     }
     // props.getArticlesForTag(props.selectedTag.tag_id);
     console.log(props.articlesForTag);
+    console.log(props.selectedTag);
   }, [props.selectedTag]);
 
   console.log(props);
@@ -53,6 +57,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getArticlesForTag: tagId => dispatch(getArticlesForTag(tagId)),
     getAllArticles: () => dispatch(getAllArticles()),
+    startAdd: tagName => dispatch(startAdd(tagName)),
   };
 }
 

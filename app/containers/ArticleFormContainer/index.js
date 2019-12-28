@@ -13,14 +13,17 @@ import { compose } from "redux";
 import { useInjectSaga } from "utils/injectSaga";
 import { useInjectReducer } from "utils/injectReducer";
 import makeSelectArticleFormContainer from "./selectors";
+import {makeSelectLoggedUser} from "../LoginContainer/selectors";
 import reducer from "./reducer";
 import saga from "./saga";
+import {addArticle, addArticleCanceled} from "./actions";
+import LinkForm from "../../components/LinkForm";
 
-export function ArticleFormContainer() {
+export function ArticleFormContainer({props}) {
   useInjectReducer({ key: "articleFormContainer", reducer });
   useInjectSaga({ key: "articleFormContainer", saga });
 
-  return <div />;
+  return <LinkForm {...props} />;
 }
 
 ArticleFormContainer.propTypes = {
@@ -28,12 +31,14 @@ ArticleFormContainer.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  articleFormContainer: makeSelectArticleFormContainer()
+  articleFormContainer: makeSelectArticleFormContainer(),
+  loggedUser: makeSelectLoggedUser(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch
+    addArticle: (article, tagId, userId) => dispatch(addArticle(tagId, userId, article)),
+    addArticleCanceled: () => dispatch(addArticleCanceled()),
   };
 }
 

@@ -8,10 +8,16 @@ import React,{useState} from "react";
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 import TextInput from "../TextInput";
+import Form from "./Form";
+import Heading from "./Heading";
+import ButtonsContainer from "./ButtonsContainer";
+import Button from "./Button";
 
 const Login = ({email, password, onChange, cancelLogin, login, ...props}) => {
   console.log("props login ", props);
   const [loginUser, setLoginUser] = useState({...props.loginUser});
+  const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
 
   function handleChange(event) {
     const {name, value} = event.target;
@@ -22,30 +28,63 @@ const Login = ({email, password, onChange, cancelLogin, login, ...props}) => {
     }))
   }
   console.log("loginUser", loginUser);
+
+  function formIsValid() {
+    const {email, password} = loginUser;
+    const errors = {};
+
+    if(!email) errors.email = "Email is required";
+    if(!password) errors.password = "Password is required";
+
+    setErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  }
+
+
   function handleSave(event) {
     event.preventDefault();
-    login(loginUser.email, loginUser.password);
+    if(!formIsValid()) return;
+    setSaving(true);
+    try{
+      login(loginUser.email, loginUser.password);
+    } catch (e) {
+      setSaving(false);
+      setErrors({handleSave: e.message})
+    }
   }
 
   return <div>
-    <form onSubmit={handleSave}>
+    <Form onSubmit={handleSave}>
+      <Heading>
+        Login with your email
+      </Heading>
+      {errors.handleSave && (
+          <div className={"alert-danger"} role={"alert"}>
+            {errors.handleSave}
+          </div>
+      )}
     <TextInput
         name={"email"}
         label={"Email"}
         value={email}
         onChange={handleChange}
-        error={/*props.error.name*/''}
+        error={errors.email}
     />
     <TextInput
         name={"password"}
         label={"Password"}
         value={password}
         onChange={handleChange}
-        error={/*props.error.name*/''}
+        error={errors.password}
     />
-    <button onClick={cancelLogin}>cancel</button>
-    <button onSubmit={handleSave}>login</button>
-    </form>
+      <ButtonsContainer>
+        <Button onClick={cancelLogin}>cancel</Button>
+        <Button type="submit" disabled={saving} onSubmit={handleSave}>
+          {saving ? "logging..." : "login"}
+        </Button>
+      </ButtonsContainer>
+    </Form>
   </div>;
 };
 

@@ -12,7 +12,7 @@ import { compose } from "redux";
 
 import { useInjectSaga } from "utils/injectSaga";
 import { useInjectReducer } from "utils/injectReducer";
-import makeSelectLoginContainer, {makeSelectLoginUser} from "./selectors";
+import makeSelectLoginContainer, {makeSelectLoginUser, makeSelectLoggedUser} from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
 import Login from "../../components/Login";
@@ -37,6 +37,7 @@ LoginContainer.propTypes = {
 const mapStateToProps = createStructuredSelector({
   loginContainer: makeSelectLoginContainer(),
   loginUser: makeSelectLoginUser(),
+  loggedUser: makeSelectLoggedUser(),
 });
 
 function mapDispatchToProps(dispatch) {
