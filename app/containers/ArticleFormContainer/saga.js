@@ -5,9 +5,9 @@ import {addArticleError, addArticleSuccess} from "./actions";
 import {goBack} from "react-router-redux";
 
 export function* addArticleSaga(action) {
-    const {article, tagId, userId} = action;
+    const {article, tagId, user} = action;
     try {
-        const createdArticle = yield call(addArticle, article, tagId, userId);
+        const createdArticle = yield call(addArticle, article, tagId, user);
         yield put(addArticleSuccess(article));
     } catch (e) {
         yield put(addArticleError(e.message))

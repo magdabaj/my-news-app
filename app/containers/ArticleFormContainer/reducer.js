@@ -4,7 +4,7 @@
  *
  */
 import produce from "immer";
-import { DEFAULT_ACTION } from "./constants";
+import { ADD_ARTICLE_SUCCESS } from "./constants";
 
 export const initialState = {};
 
@@ -12,7 +12,7 @@ export const initialState = {};
 const articleFormContainerReducer = (state = initialState, action) =>
   produce(state, (/* draft */) => {
     switch (action.type) {
-      case DEFAULT_ACTION:
+      case ADD_ARTICLE_SUCCESS:
         break;
     }
   });

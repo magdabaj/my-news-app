@@ -6,11 +6,11 @@
 
 import {ADD_ARTICLE, ADD_ARTICLE_CANCELED, ADD_ARTICLE_ERROR, ADD_ARTICLE_SUCCESS} from "./constants";
 
-export const addArticle = (article, tagId, userId) => ({
+export const addArticle = (article, tagId, user) => ({
   type: ADD_ARTICLE,
   article,
   tagId,
-  userId,
+  user
 });
 
 export const addArticleSuccess = article => ({

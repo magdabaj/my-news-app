@@ -14,25 +14,23 @@ import { useInjectSaga } from "utils/injectSaga";
 import { useInjectReducer } from "utils/injectReducer";
 import makeSelectArticleFormContainer from "./selectors";
 import {makeSelectLoggedUser} from "../LoginContainer/selectors";
+import {makeSelectSelectedTag} from "../NavigationContainer/selectors";
 import reducer from "./reducer";
 import saga from "./saga";
 import {addArticle, addArticleCanceled} from "./actions";
 import LinkForm from "../../components/LinkForm";
 
-export function ArticleFormContainer({props}) {
+export function ArticleFormContainer({...props}) {
   useInjectReducer({ key: "articleFormContainer", reducer });
   useInjectSaga({ key: "articleFormContainer", saga });
-
+  console.log(props);
   return <LinkForm {...props} />;
 }
-
-ArticleFormContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired
-};
 
 const mapStateToProps = createStructuredSelector({
   articleFormContainer: makeSelectArticleFormContainer(),
   loggedUser: makeSelectLoggedUser(),
+  selectedTag: makeSelectSelectedTag(),
 });
 
 function mapDispatchToProps(dispatch) {
