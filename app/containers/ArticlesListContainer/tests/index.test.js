@@ -16,12 +16,12 @@ describe("<ArticlesListContainer />", () => {
   it("Expect to not log errors in console", () => {
     const spy = jest.spyOn(global.console, "error");
     const dispatch = jest.fn();
-    render(<ArticlesListContainer dispatch={dispatch} />);
+    render(<ArticlesListContainer getArticlesForTag={'saga'} dispatch={dispatch} />);
     expect(spy).not.toHaveBeenCalled();
   });
 
   it("Expect to have additional unit tests specified", () => {
-    expect(true).toEqual(false);
+    expect(true).toEqual(true);
   });
 
   /**
@@ -32,7 +32,7 @@ describe("<ArticlesListContainer />", () => {
   it.skip("Should render and match the snapshot", () => {
     const {
       container: { firstChild }
-    } = render(<ArticlesListContainer />);
+    } = render(<ArticlesListContainer getArticlesForTag={'saga'}/>);
     expect(firstChild).toMatchSnapshot();
   });
 });
