@@ -11,18 +11,32 @@ import { render } from "react-testing-library";
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
 import { NavigationContainer } from "../index";
+import {getTags, selectTag, toggleDrawer} from "../actions";
+import {makeSelectIsDrawerOpen, makeSelectSelectedTag, makeSelectTags} from "../selectors";
+import {makeSelectEmail} from "../../LoginContainer/selectors";
+import {withStoreIntlAndRouter} from "../../../utils/testHelpers";
 
 function renderNavigationContainer(args) {
   const defaultProps = {
+    getTags: () => {},
+    selectTag: () => {},
+    toggleDrawer: () => {},
+    tags: [],
+    selectedTag: {},
+    isDrawerOpen: false,
+    email: '',
+  };
 
-  }
+  const props = {...defaultProps, ...args}
+
+  return render(withStoreIntlAndRouter(<NavigationContainer {...props}/>))
 }
 
 describe("<NavigationContainer />", () => {
   it("Expect to not log errors in console", () => {
     const spy = jest.spyOn(global.console, "error");
     const dispatch = jest.fn();
-    render(<NavigationContainer dispatch={dispatch} />);
+    renderNavigationContainer();
     expect(spy).not.toHaveBeenCalled();
   });
 
@@ -35,10 +49,10 @@ describe("<NavigationContainer />", () => {
    *
    * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
    */
-  it.skip("Should render and match the snapshot", () => {
+  it("Should render and match the snapshot", () => {
     const {
       container: { firstChild }
-    } = render(<NavigationContainer />);
+    } = renderNavigationContainer();
     expect(firstChild).toMatchSnapshot();
   });
 });
