@@ -32,5 +32,25 @@ describe("NavigationContainer actions", () => {
       };
       expect(getTagsFailed(error)).toEqual(expected);
     });
+
+    it("has a type of SELECT_TAG", () => {
+      const selectedTag = {
+        id: 1,
+        name: 'saga',
+      };
+      const expected = {
+        type: SELECT_TAG,
+        selectedTag,
+      };
+      expect(selectTag(selectedTag)).toEqual(expected);
+    });
+
+    it("has a type of GET_ARTICLES_BY_TAG", () => {
+
+      const expected = {
+        type: TOGGLE_DRAWER,
+      };
+      expect(toggleDrawer()).toEqual(expected);
+    });
   });
 });

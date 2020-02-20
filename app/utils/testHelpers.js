@@ -7,7 +7,7 @@ export const withStoreIntlAndRouter = component => {
     const store = configureStore({}, browserHistory)
     return (
         <Provider store={store}>
-                    <BrowserRouter>{component}</BrowserRouter>
+            <BrowserRouter>{component}</BrowserRouter>
         </Provider>
     )
 }

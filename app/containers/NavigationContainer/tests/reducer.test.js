@@ -1,6 +1,6 @@
-// import produce from 'immer';
+import produce from 'immer';
 import navigationContainerReducer from "../reducer";
-// import { someAction } from '../actions';
+import {getTagsSuccess} from "../actions";
 
 /* eslint-disable default-case, no-param-reassign */
 describe("navigationContainerReducer", () => {
@@ -18,6 +18,28 @@ describe("navigationContainerReducer", () => {
     const expectedResult = state;
     expect(navigationContainerReducer(undefined, {})).toEqual(expectedResult);
   });
+
+  describe('getting tags', () => {
+    it('gets tags successfully', () => {
+      const _tags = [
+        {
+          id: 1,
+          name: 'saga',
+        },
+        {
+          id: 2,
+          name: 'redux',
+        }
+      ]
+      const expectedResult = produce(state, draft => {
+        draft.tags = _tags
+      })
+
+      expect(
+          navigationContainerReducer(state, getTagsSuccess(_tags))
+      ).toEqual(expectedResult)
+    })
+  })
 
   /**
    * Example state change comparison

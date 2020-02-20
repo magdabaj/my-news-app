@@ -37,17 +37,6 @@ export function NavigationContainer({...props }) {
 
   return <Navigation {...props} />;
 }
-
-// NavigationContainer.propTypes = {
-//   tags: PropTypes.array.isRequired,
-//   getTags: PropTypes.func.isRequired,
-//   getArticlesByTag: PropTypes.func.isRequired,
-//   selectTag: PropTypes.func.isRequired,
-//   toggleDrawer: PropTypes.func.isRequired,
-//   selectedTag: PropTypes.object,
-//   isDrawerOpen: PropTypes.bool.isRequired,
-// };
-
 const mapStateToProps = createStructuredSelector({
   navigationContainer: makeSelectNavigationContainer(),
   tags: makeSelectTags(),

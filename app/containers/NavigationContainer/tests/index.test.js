@@ -12,6 +12,12 @@ import { render } from "react-testing-library";
 
 import { NavigationContainer } from "../index";
 
+function renderNavigationContainer(args) {
+  const defaultProps = {
+
+  }
+}
+
 describe("<NavigationContainer />", () => {
   it("Expect to not log errors in console", () => {
     const spy = jest.spyOn(global.console, "error");
