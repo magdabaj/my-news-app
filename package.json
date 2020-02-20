@@ -43,7 +43,7 @@
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
-    "jest": "jest"
+    "jest": "jest --watch"
   },
   "browserslist": [
     "last 2 versions",
@@ -86,6 +86,7 @@
     "lodash": "4.17.11",
     "minimist": "1.2.0",
     "prop-types": "15.7.2",
+    "ramda": "^0.27.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-fontawesome": "^1.7.1",

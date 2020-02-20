@@ -1,13 +1,48 @@
-import { defaultAction } from "../actions";
-import { DEFAULT_ACTION } from "../constants";
+import { loginSuccess, login, cancelLogin, loginFailed } from "../actions";
+import { LOGIN_SUCCESS, LOGIN, LOGIN_FAILED, CANCEL_LOGIN } from "../constants";
 
 describe("LoginContainer actions", () => {
   describe("Default Action", () => {
-    it("has a type of DEFAULT_ACTION", () => {
+    const email = 'email';
+    const password = 'password';
+    it("has a type of LOGIN", () => {
       const expected = {
-        type: DEFAULT_ACTION
+        type: LOGIN,
+        email,
+        password
       };
-      expect(defaultAction()).toEqual(expected);
+      expect(login(email, password)).toEqual(expected);
+    });
+
+    it("has a type of LOGIN_SUCCESS", () => {
+      const user = {
+        userId: 1,
+        email: 'email',
+        password: 'password',
+      };
+      const expected = {
+        type: LOGIN_SUCCESS,
+        user
+      };
+      expect(loginSuccess(user)).toEqual(expected);
+    });
+
+    it("has a type of LOGIN_FAILED", () => {
+      const error = {
+        message: 'error'
+      };
+      const expected = {
+        type: LOGIN_FAILED,
+        error
+      };
+      expect(loginFailed(error)).toEqual(expected);
+    });
+
+    it("has a type of CANCEL_LOGIN", () => {
+      const expected = {
+        type: CANCEL_LOGIN,
+      };
+      expect(cancelLogin()).toEqual(expected);
     });
   });
 });

@@ -7,7 +7,10 @@ describe("navigationContainerReducer", () => {
   let state;
   beforeEach(() => {
     state = {
-      // default state params here
+      tags: [],
+      selectedTag: {},
+      isDrawerOpen: false,
+      routerLocation: '',
     };
   });
 

@@ -15,7 +15,7 @@ import './styles.css';
 const LinkList = ({articlesForTag, startAdd, children, selectedTag}) => {
   return (
       <div>
-          {selectedTag.name.length > 0 ?
+          {selectedTag !== undefined ?
               <div>
                   {articlesForTag.length > 0 ?
                     articlesForTag.map(article => (

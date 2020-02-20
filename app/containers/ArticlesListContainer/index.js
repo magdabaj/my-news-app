@@ -43,10 +43,6 @@ export const ArticlesListContainer = ({...props}) => {
   return <LinkList {...props} />;
 };
 
-ArticlesListContainer.propTypes = {
-  getArticlesForTag: PropTypes.func.isRequired,
-};
-
 const mapStateToProps = createStructuredSelector({
   articlesListContainer: makeSelectArticlesListContainer(),
   selectedTag: selectTag(),

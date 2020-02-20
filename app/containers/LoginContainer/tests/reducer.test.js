@@ -7,13 +7,23 @@ describe("loginContainerReducer", () => {
   let state;
   beforeEach(() => {
     state = {
-      // default state params here
+      loggedUser: {},
+      loginUser: {
+        email: '',
+        password: '',
+      },
     };
   });
 
   it("returns the initial state", () => {
     const expectedResult = state;
-    expect(loginContainerReducer(undefined, {})).toEqual(expectedResult);
+    expect(loginContainerReducer(undefined, {
+      loggedUser: {},
+      loginUser: {
+        email: '',
+        password: '',
+      },
+    })).toEqual(expectedResult);
   });
 
   /**

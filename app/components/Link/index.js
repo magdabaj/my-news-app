@@ -40,26 +40,28 @@ import './styles.css';
 // );
 
 const Link = ({ article }) => (
-      <LinkContainer>
-        <VotingContainer>
-          <VotingCount>
-            0
-          </VotingCount>
-        </VotingContainer>
-        <DetailsContainer>
-          <div>
-            <LinkAnchor href={article.url}>
-              {article.url}
-            </LinkAnchor>
-            <Description>{article.title}</Description>
-          </div>
-        </DetailsContainer>
-      </LinkContainer>
+    article !== undefined ?
+        <LinkContainer>
+            <VotingContainer>
+                <VotingCount>
+                    0
+                </VotingCount>
+            </VotingContainer>
+            <DetailsContainer>
+                <div>
+                    <LinkAnchor href={article.url}>
+                        {article.url}
+                    </LinkAnchor>
+                    <Description>{article.title}</Description>
+                </div>
+            </DetailsContainer>
+        </LinkContainer> :
+        null
 );
 
 
 Link.propTypes = {
-  article: PropTypes.object.isRequired,
+  article: PropTypes.object,
 };
 
 export default Link;

@@ -11,12 +11,28 @@ import { render } from "react-testing-library";
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
 import { ArticlesListContainer } from "../index";
+import {withStoreIntlAndRouter} from "../../../utils/testHelpers";
+import makeSelectArticlesListContainer, {makeSelectArticles, selectTag} from "../selectors";
+import {getAllArticles, getArticlesForTag, startAdd} from "../actions";
 
 describe("<ArticlesListContainer />", () => {
+  function renderArticlesListContainer(args) {
+    const defaultProps = {
+      selectedTag: {},
+      articlesForTag: [],
+      getArticlesForTag: () => {},
+      getAllArticles: () => {},
+      startAdd: () => {},
+    }
+
+    const props = {...defaultProps, ...args};
+
+    return render(withStoreIntlAndRouter(<ArticlesListContainer {...props}/>))
+  }
   it("Expect to not log errors in console", () => {
     const spy = jest.spyOn(global.console, "error");
     const dispatch = jest.fn();
-    render(<ArticlesListContainer getArticlesForTag={'saga'} dispatch={dispatch} />);
+    renderArticlesListContainer();
     expect(spy).not.toHaveBeenCalled();
   });
 
@@ -32,7 +48,7 @@ describe("<ArticlesListContainer />", () => {
   it.skip("Should render and match the snapshot", () => {
     const {
       container: { firstChild }
-    } = render(<ArticlesListContainer getArticlesForTag={'saga'}/>);
+    } = renderArticlesListContainer();
     expect(firstChild).toMatchSnapshot();
   });
 });

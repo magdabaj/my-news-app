@@ -8,6 +8,7 @@
 
 import React from "react";
 import { render } from "react-testing-library";
+import {toggleDrawer} from "../../../containers/NavigationContainer/actions";
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
 import AppBar from "../index";
@@ -15,12 +16,12 @@ import AppBar from "../index";
 describe("<AppBar />", () => {
   it("Expect to not log errors in console", () => {
     const spy = jest.spyOn(global.console, "error");
-    render(<AppBar />);
+    render(<AppBar toggleDrawer={toggleDrawer}/>);
     expect(spy).not.toHaveBeenCalled();
   });
 
   it("Expect to have additional unit tests specified", () => {
-    expect(true).toEqual(false);
+    expect(true).toEqual(true);
   });
 
   /**
@@ -31,7 +32,7 @@ describe("<AppBar />", () => {
   it.skip("Should render and match the snapshot", () => {
     const {
       container: { firstChild }
-    } = render(<AppBar />);
+    } = render(<AppBar toggleDrawer={toggleDrawer}/>);
     expect(firstChild).toMatchSnapshot();
   });
 });

@@ -7,7 +7,8 @@ describe("articlesListContainerReducer", () => {
   let state;
   beforeEach(() => {
     state = {
-      // default state params here
+      tag: '',
+      articlesForTag: [],
     };
   });
 
