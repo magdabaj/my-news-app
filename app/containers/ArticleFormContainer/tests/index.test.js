@@ -11,12 +11,26 @@ import { render } from "react-testing-library";
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
 import { ArticleFormContainer } from "../index";
+import {addArticle, addArticleCanceled} from "../actions";
+import {withStoreIntlAndRouter} from "../../../utils/testHelpers";
+
+function renderArticleFormContainer(args) {
+  const defaultprops = {
+    addArticle: () => {},
+    addArticleCanceled: () => {},
+    loggedUser: {},
+    selectedTag: {},
+  };
+
+  const props = {...defaultprops, ...args};
+
+  return render(withStoreIntlAndRouter(<ArticleFormContainer {...props} />))
+}
 
 describe("<ArticleFormContainer />", () => {
   it("Expect to not log errors in console", () => {
     const spy = jest.spyOn(global.console, "error");
-    const dispatch = jest.fn();
-    render(<ArticleFormContainer dispatch={dispatch} />);
+    renderArticleFormContainer();
     expect(spy).not.toHaveBeenCalled();
   });
 
@@ -29,10 +43,10 @@ describe("<ArticleFormContainer />", () => {
    *
    * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
    */
-  it.skip("Should render and match the snapshot", () => {
+  it("Should render and match the snapshot", () => {
     const {
       container: { firstChild }
-    } = render(<ArticleFormContainer />);
+    } = renderArticleFormContainer();
     expect(firstChild).toMatchSnapshot();
   });
 });

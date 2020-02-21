@@ -45,7 +45,7 @@ const mapStateToProps = createStructuredSelector({
   email: makeSelectEmail(),
 });
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
     getTags: () => dispatch(getTags()),
     selectTag: selectedTag => dispatch(selectTag(selectedTag)),

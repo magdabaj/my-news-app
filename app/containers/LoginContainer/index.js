@@ -30,17 +30,13 @@ export function LoginContainer({...props}) {
   </div>;
 }
 
-LoginContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired
-};
-
 const mapStateToProps = createStructuredSelector({
   loginContainer: makeSelectLoginContainer(),
   loginUser: makeSelectLoginUser(),
   loggedUser: makeSelectLoggedUser(),
 });
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
     login: (email, password) => dispatch(login(email, password)),
     cancelLogin: () => dispatch(cancelLogin()),

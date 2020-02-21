@@ -10,13 +10,27 @@ import React from "react";
 import { render } from "react-testing-library";
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
-import { LoginContainer } from "../index";
+import { LoginContainer, mapDispatchToProps } from "../index";
+import {cancelLogin, login} from "../actions";
+import {withStoreIntlAndRouter} from "../../../utils/testHelpers";
+
+function renderLoginContainer(args) {
+  const defaultProps = {
+    login: () => {},
+    cancelLogin: () => {},
+    loginUser: {},
+    loggedUser: {},
+  }
+
+  const props = {...defaultProps, ...args}
+
+  return render(withStoreIntlAndRouter(<LoginContainer {...props}/>))
+}
 
 describe("<LoginContainer />", () => {
   it("Expect to not log errors in console", () => {
     const spy = jest.spyOn(global.console, "error");
-    const dispatch = jest.fn();
-    render(<LoginContainer dispatch={dispatch} />);
+    renderLoginContainer();
     expect(spy).not.toHaveBeenCalled();
   });
 
@@ -32,7 +46,40 @@ describe("<LoginContainer />", () => {
   it.skip("Should render and match the snapshot", () => {
     const {
       container: { firstChild }
-    } = render(<LoginContainer />);
+    } = renderLoginContainer();
     expect(firstChild).toMatchSnapshot();
   });
+
+  describe('mapDispatchToProps', () => {
+    describe('login', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn()
+        const result = mapDispatchToProps(dispatch)
+        expect(result.login).toBeDefined()
+      })
+      it('should dispatch login when called', () => {
+        const dispatch = jest.fn()
+        const result = mapDispatchToProps(dispatch)
+        const user = {
+          email: 'em',
+          password: 'pas'
+        }
+        result.login(user.email, user.password)
+        expect(dispatch).toHaveBeenCalledWith(login(user.email, user.password))
+      })
+    })
+    describe('cancelLogin', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn()
+        const result = mapDispatchToProps(dispatch)
+        expect(result.cancelLogin).toBeDefined()
+      })
+      it('should dispatch cancelLogin when called', () => {
+        const dispatch = jest.fn()
+        const result = mapDispatchToProps(dispatch)
+        result.cancelLogin()
+        expect(dispatch).toHaveBeenCalledWith(cancelLogin())
+      })
+    })
+  })
 });

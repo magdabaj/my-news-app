@@ -8,7 +8,7 @@ export function* handleDone() {
     yield put(goBack());
 }
 
-export function* handleLoginSuccess(action) {
+export function* handleUserLogin(action) {
     const {email, password} = action;
     try{
         const user = yield call(loginUser,email, password);
@@ -20,7 +20,7 @@ export function* handleLoginSuccess(action) {
 }
 
 export function* doLoginSaga() {
-    yield takeLatest(LOGIN, handleLoginSuccess);
+    yield takeLatest(LOGIN, handleUserLogin);
 }
 
 export function* cancelSaga() {

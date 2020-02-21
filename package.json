@@ -43,7 +43,8 @@
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
-    "jest": "jest --watch"
+    "jest": "jest --watch -- -u",
+    "jest:coverage": "jest --coverage"
   },
   "browserslist": [
     "last 2 versions",

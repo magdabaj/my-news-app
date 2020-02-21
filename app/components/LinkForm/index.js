@@ -98,7 +98,6 @@ const LinkForm = ({loggedUser, addArticle, addArticleCanceled, selectedTag}) => 
 };
 
 LinkForm.propTypes = {
-  loggedUser: PropTypes.obj,
   addArticle: PropTypes.func.isRequired,
   addArticleCanceled: PropTypes.func.isRequired,
   selectedTag: PropTypes.object.isRequired

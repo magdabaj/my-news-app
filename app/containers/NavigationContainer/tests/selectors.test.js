@@ -1,4 +1,9 @@
-import { makeSelectTags, selectNavigationContainerDomain, makeSelectSelectedTag } from '../selectors';
+import {
+  makeSelectTags,
+  selectNavigationContainerDomain,
+  makeSelectSelectedTag,
+  makeSelectIsDrawerOpen
+} from '../selectors';
 import { type } from 'ramda'
 
 describe("Make select tag selector", () => {
@@ -57,4 +62,19 @@ describe("makeSelectSelectedTag", () => {
     expect(tagSelector(mockedState)).toEqual(selectedTag)
   })
 })
+
+describe('makeSelectIsDrawerOpen', () => {
+  const drawerSelector = makeSelectIsDrawerOpen();
+  it('selects drawer status', () => {
+    const isDrawerOpen = false;
+
+    const mockedState = {
+      navigationContainer: {
+        isDrawerOpen
+      }
+    };
+
+    expect(drawerSelector(mockedState)).toEqual(isDrawerOpen);
+  })
+});
 

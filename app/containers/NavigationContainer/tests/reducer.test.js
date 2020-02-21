@@ -1,6 +1,6 @@
 import produce from 'immer';
 import navigationContainerReducer from "../reducer";
-import {getTagsSuccess} from "../actions";
+import {getTagsSuccess, selectTag, toggleDrawer} from "../actions";
 
 /* eslint-disable default-case, no-param-reassign */
 describe("navigationContainerReducer", () => {
@@ -39,7 +39,31 @@ describe("navigationContainerReducer", () => {
           navigationContainerReducer(state, getTagsSuccess(_tags))
       ).toEqual(expectedResult)
     })
-  })
+
+    it('selects a tag', () => {
+        const _selectedTag = {
+        id: 1,
+        name: 'saga',
+      };
+      const expectedResult = produce(state, draft => {
+        draft.selectedTag = _selectedTag
+      });
+
+      expect(
+          navigationContainerReducer(state, selectTag(_selectedTag))
+      ).toEqual(expectedResult)
+    });
+
+    it('toggles the drawer', () => {
+      const expectedResult = produce(state, draft => {
+        draft.isDrawerOpen = !state.isDrawerOpen
+      });
+
+      expect(
+          navigationContainerReducer(state, toggleDrawer())
+      ).toEqual(expectedResult)
+    })
+  });
 
   /**
    * Example state change comparison

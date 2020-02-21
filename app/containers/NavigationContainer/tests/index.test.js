@@ -10,7 +10,7 @@ import React from "react";
 import { render } from "react-testing-library";
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
-import { NavigationContainer } from "../index";
+import { NavigationContainer, mapDispatchToProps } from "../index";
 import {getTags, selectTag, toggleDrawer} from "../actions";
 import {makeSelectIsDrawerOpen, makeSelectSelectedTag, makeSelectTags} from "../selectors";
 import {makeSelectEmail} from "../../LoginContainer/selectors";
@@ -40,8 +40,10 @@ describe("<NavigationContainer />", () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it("Expect to have additional unit tests specified", () => {
-    expect(true).toEqual(true);
+  it("make a request for tags if their length equals 0", () => {
+    const requestTagsMock = jest.fn()
+    renderNavigationContainer({getTags: requestTagsMock})
+    expect(requestTagsMock).toHaveBeenCalled();
   });
 
   /**
@@ -55,4 +57,50 @@ describe("<NavigationContainer />", () => {
     } = renderNavigationContainer();
     expect(firstChild).toMatchSnapshot();
   });
+
+  describe('mapDispatchToProps', () => {
+    describe('getTags', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        expect(result.getTags).toBeDefined();
+      })
+      it('should dispatch getTags when called', () => {
+        const dispatch = jest.fn()
+        const result = mapDispatchToProps(dispatch)
+        result.getTags()
+        expect(dispatch).toHaveBeenCalledWith(getTags())
+      })
+    })
+    describe('selectTag', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        expect(result.selectTag).toBeDefined();
+      })
+      it('should dispatch selectTag when called', () => {
+        const selectedTag = {
+          id: 1,
+          name: 'saga'
+        }
+        const dispatch = jest.fn()
+        const result = mapDispatchToProps(dispatch)
+        result.selectTag(selectedTag)
+        expect(dispatch).toHaveBeenCalledWith(selectTag(selectedTag))
+      })
+    })
+    describe('toggleDrawer', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        expect(result.toggleDrawer).toBeDefined();
+      })
+      it('should dispatch toggleDrawer when called', () => {
+        const dispatch = jest.fn()
+        const result = mapDispatchToProps(dispatch)
+        result.toggleDrawer()
+        expect(dispatch).toHaveBeenCalledWith(toggleDrawer())
+      })
+    })
+  })
 });

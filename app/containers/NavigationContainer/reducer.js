@@ -4,7 +4,7 @@
  *
  */
 import produce from "immer";
-import {DEFAULT_ACTION, GET_TAGS_SUCCESS, SELECT_TAG, TOGGLE_DRAWER} from "./constants";
+import { GET_TAGS_SUCCESS, SELECT_TAG, TOGGLE_DRAWER} from "./constants";
 
 export const initialState = {
     tags: [],

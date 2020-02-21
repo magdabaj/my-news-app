@@ -28,6 +28,7 @@ export function* setDefaultArticles(action) {
         // todo display all articles
         yield put(push('/topics'))
     }
+    console.log(state)
 }
 
 export function* watchDefaultArticlesSetting() {
