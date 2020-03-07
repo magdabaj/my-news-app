@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IconButton /> Should render and match the snapshot 1`] = `
+<div
+  class="iconButton"
+>
+  <span
+    aria-hidden="true"
+    class="fa fa-bars icon"
+  />
+</div>
+`;

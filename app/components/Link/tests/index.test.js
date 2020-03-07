@@ -8,11 +8,17 @@
 
 import React from "react";
 import { render } from "react-testing-library";
-// import 'jest-dom/extend-expect'; // add some helpful assertions
+import 'jest-dom/extend-expect'; // add some helpful assertions
 
 import Link from "../index";
 
 describe("<Link />", () => {
+  const article = {
+    id: 1,
+    url: "some url",
+    title: "some title",
+  };
+
   it("Expect to not log errors in console", () => {
     const spy = jest.spyOn(global.console, "error");
     render(<Link />);
@@ -20,7 +26,9 @@ describe("<Link />", () => {
   });
 
   it("Expect to have additional unit tests specified", () => {
-    expect(true).toEqual(true);
+    const {getByText} = render(<Link article={article}/>);
+    expect(getByText(article.url)).toBeInTheDocument();
+    expect(getByText(article.title)).toBeInTheDocument();
   });
 
   /**

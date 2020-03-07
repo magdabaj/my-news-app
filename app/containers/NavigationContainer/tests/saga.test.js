@@ -9,7 +9,7 @@ import { push } from 'react-router-redux';
 
 // const generator = navigationContainerSaga();
 
-import {getTags, pushTag, pushTagTest, watchTagsLoad, watchTagsPush} from "../saga";
+import {getTags, pushTag, watchTagsLoad, watchTagsPush} from "../saga";
 import {getTagsFailed, getTagsSuccess} from "../actions";
 import {GET_TAGS, SELECT_TAG} from "../constants";
 
@@ -64,7 +64,7 @@ describe('loading tags saga', () => {
 
 describe('push tag saga', () => {
   let pushTagGenerator;
-
+  push = jest.fn()
   const action = {
     type: SELECT_TAG,
     selectedTag: {
@@ -75,7 +75,7 @@ describe('push tag saga', () => {
   beforeEach(() => {
     pushTagGenerator = pushTag(action);
 
-    const callDescriptor = pushTagGenerator.next(action.selectedTag.name).value;
+    const callDescriptor = pushTagGenerator.next().value;
     expect(callDescriptor).toMatchSnapshot();
   });
 })

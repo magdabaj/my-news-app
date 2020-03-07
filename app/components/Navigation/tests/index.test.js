@@ -11,23 +11,29 @@ import { render } from "react-testing-library";
 import {toggleDrawer} from "../../../containers/NavigationContainer/actions";
 import { selectTag } from "../../../containers/NavigationContainer/actions";
 // import 'jest-dom/extend-expect'; // add some helpful assertions
+import {Router} from 'react-router-dom';
+import {createMemoryHistory} from "history";
 
 import Navigation from "../index";
 
 describe("<Navigation />", () => {
+  const history = createMemoryHistory({initialEntries: ['/']});
+  const tags = [
+    {
+      id: 2,
+      name: 'saga'
+    },
+    {
+      id:1,
+      name: 'redux'
+    },
+  ];
+
   it("Expect to not log errors in console", () => {
     const spy = jest.spyOn(global.console, "error");
-    const tags = [
-      {
-        id: 2,
-        name: 'saga'
-      },
-      {
-        id:1,
-        name: 'redux'
-      },
-    ];
-    render(<Navigation toggleDrawer={toggleDrawer} isDrawerOpen={false} selectTag={selectTag} email={''} tags = {tags} />);
+    render(<Router history={history}>
+      <Navigation toggleDrawer={toggleDrawer} isDrawerOpen={false} selectTag={selectTag} email={''} tags = {tags} />
+    </Router>);
     expect(spy).not.toHaveBeenCalled();
   });
 
@@ -40,10 +46,12 @@ describe("<Navigation />", () => {
    *
    * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
    */
-  it.skip("Should render and match the snapshot", () => {
+  it("Should render and match the snapshot", () => {
     const {
       container: { firstChild }
-    } = render(<Navigation />);
+    } = render(<Router history={history}>
+      <Navigation toggleDrawer={toggleDrawer} isDrawerOpen={false} selectTag={selectTag} email={''} tags = {tags} />
+    </Router>);
     expect(firstChild).toMatchSnapshot();
   });
 });

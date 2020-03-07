@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Navigation /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="AppBar__AppBarContainer-c7n8kq-0 ciJhyx"
+  >
+    <div
+      class="iconButton"
+    >
+      <span
+        aria-hidden="true"
+        class="fa fa-bars"
+      />
+    </div>
+    <div
+      class="Heading-zlrub7-0 hSXzTs"
+    >
+      <a
+        class="StyledLink-sc-1rnvk1v-0 jWsYVy"
+        href="/topics"
+      >
+        Coder daily
+      </a>
+    </div>
+    <div
+      class="LinkContainer-sc-1jaoxeg-0 dRHldZ"
+    >
+      <a
+        href="/login"
+      >
+         login 
+      </a>
+    </div>
+  </div>
+  <div
+    class="drawer"
+    role="drawerClass"
+  >
+    <div
+      class="item"
+    >
+      saga
+    </div>
+    <div
+      class="item"
+    >
+      redux
+    </div>
+  </div>
+</div>
+`;

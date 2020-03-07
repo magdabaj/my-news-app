@@ -14,7 +14,7 @@ const Drawer = ({ tags, isDrawerOpen, selectTag }) => {
 
   return (
       tags !== undefined ?
-          <div className={drawerClass}>
+          <div className={drawerClass} role={'drawerClass'}>
             {tags.map(tag => (
                 <div
                     className={'item'}

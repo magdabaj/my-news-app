@@ -7,16 +7,24 @@
  */
 
 import React from "react";
+import {Router} from 'react-router-dom';
+import {createMemoryHistory} from "history";
 import { render } from "react-testing-library";
 import {toggleDrawer} from "../../../containers/NavigationContainer/actions";
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
 import AppBar from "../index";
 
+jest.mock('../../../containers/NavigationContainer/actions');
+
 describe("<AppBar />", () => {
+  const history = createMemoryHistory({initialEntries: ['/']})
   it("Expect to not log errors in console", () => {
     const spy = jest.spyOn(global.console, "error");
-    render(<AppBar toggleDrawer={toggleDrawer}/>);
+    render(
+        <Router history={history}>
+          <AppBar toggleDrawer={toggleDrawer}/>
+        </Router>);
     expect(spy).not.toHaveBeenCalled();
   });
 
